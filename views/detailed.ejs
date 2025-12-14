@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stock Details</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+
+    <% if (error) { %>
+      <h1><%= error %></h1>
+      <a href="/search">Search another stock</a>
+
+    <% } else if (stock) { %>
+
+      <h1>
+        <%= stock.shortName ? stock.shortName : 'Unknown Stock' %>
+        (<%= stock.symbol ? stock.symbol : 'N/A' %>)
+      </h1>
+
+      <p>
+        Current Price:
+        $<%= typeof stock.regularMarketPrice === 'number'
+              ? stock.regularMarketPrice
+              : 'N/A' %>
+      </p>
+
+      <p>
+        Change Percent:
+        <%= typeof stock.regularMarketChangePercent === 'number'
+              ? stock.regularMarketChangePercent.toFixed(2) + '%'
+              : 'N/A' %>
+      </p>
+
+      <p>
+        52 Week Range:
+        <%= stock.fiftyTwoWeekRange ? stock.fiftyTwoWeekRange : 'N/A' %>
+      </p>
+
+      <p>
+        Market Cap:
+        <%= stock.marketCap ? stock.marketCap : 'N/A' %>
+      </p>
+
+      <p>
+        EPS (TTM):
+        <%= typeof stock.epsTrailingTwelveMonths === 'number'
+              ? stock.epsTrailingTwelveMonths
+              : 'N/A' %>
+      </p>
+
+      <% if (
+        typeof stock.regularMarketPreviousClose === 'number' &&
+        typeof stock.fiftyDayAverage === 'number' &&
+        typeof stock.twoHundredDayAverage === 'number'
+      ) { %>
+
+        <canvas id="stockChart" width="400" height="200"></canvas>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+          const ctx = document.getElementById('stockChart').getContext('2d');
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['Previous Close', '50-day Avg', '200-day Avg'],
+              datasets: [{
+                label: 'Price',
+                data: [
+                  <%= stock.regularMarketPreviousClose %>,
+                  <%= stock.fiftyDayAverage %>,
+                  <%= stock.twoHundredDayAverage %>
+                ]
+              }]
+            },
+            options: { responsive: true }
+          });
+        </script>
+
+      <% } %>
+
+      <div class="buttons">
+        <form action="/notebook/add" method="POST">
+          <input type="hidden" name="symbol" value="<%= stock.symbol %>">
+          <button type="submit">Add to Notebook</button>
+        </form>
+
+        <a href="/search"><button>Search another stock</button></a>
+      </div>
+
+    <% } else { %>
+
+      <h1>No data to display.</h1>
+      <a href="/search">Search a stock</a>
+
+    <% } %>
+
+  </div>
+</body>
+</html>

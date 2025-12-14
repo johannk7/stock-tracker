@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Stocks</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Search a Stock</h1>
+  <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+  <% } %>
+  <form action="/search" method="post">
+    <input type="text" name="symbol" placeholder="Enter ticker">
+    <button type="submit">Search</button>
+  </form>
+  <a href="/">Home</a>
+</body>
+</html>

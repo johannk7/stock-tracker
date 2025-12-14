@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Result</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<%
+  const quote = stock.optionChain.result[0].quote;
+%>
+
+<h1><%= quote.shortName %> (<%= quote.symbol %>)</h1>
+
+<p>Current Price: $<%= quote.regularMarketPrice %></p>
+
+<p>
+  Change Percent:
+  <%= quote.regularMarketChangePercent.toFixed(2) %>%
+</p>
+
+<form action="/stocks/<%= quote.symbol %>" method="get">
+  <button type="submit">View More Details</button>
+</form>
+
+<form action="/notebook/add" method="post">
+  <input type="hidden" name="symbol" value="<%= quote.symbol %>">
+  <button type="submit">Add to Notebook</button>
+</form>
+
+<a href="/search">Search another stock</a>
+
+</body>
+</html>

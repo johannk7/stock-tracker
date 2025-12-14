@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Notebook</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>My Stock Notebook</h1>
+<ul>
+  <% stocks.forEach(stock => { %>
+    <li>
+      <%= stock.symbol %>
+      <form action="/notebook/delete/<%= stock._id %>" method="post" style="display:inline;">
+        <button type="submit">Delete</button>
+      </form>
+      <form action="/stocks/<%= stock.symbol %>" method="get" style="display:inline;">
+        <button type="submit">View Details</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>
+<a href="/">Home</a>
+</body>
+</html>
