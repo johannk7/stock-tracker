@@ -20,4 +20,4 @@ https://youtube.com/M2IXCMZ9koA
 jkuruvil@terpmail.umd.edu
 
 ## Deployed App Link
-https://REPLACE_WITH_RENDER_LINK
+https://stock-tracker-kit7.onrender.com/
