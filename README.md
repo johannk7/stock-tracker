@@ -13,7 +13,7 @@ A Node.js/Express application that allows users to search for real-time stock in
  https://www.youtube.com/watch?v=M2IXCMZ9koA
 ## APIs Used
 - Yahoo Finance API (via RapidAPI)  
-  https://rapidapi.com/apidojo/api/yahoo-finance1/
+  https://rapidapi.com/3b-data-3b-data-default/api/yahoo-finance-real-time1
 
 ## Contact Email
 jkuruvil@terpmail.umd.edu
